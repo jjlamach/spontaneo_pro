@@ -1,6 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:spontaneo_pro/colors.dart';
 import 'package:spontaneo_pro/strings.dart';
 
@@ -60,16 +59,16 @@ class _SplashscreenPageState extends State<SplashscreenPage> {
                 widthFactor: 0.8,
                 child: TextButton(
                   onPressed: () {},
-                  child: Text(
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: AppColor.purple,
+                  ),
+                  child: const Text(
                     Strings.logIn,
                     style: TextStyle(
                       fontSize: 25.0,
                       fontWeight: FontWeight.w400,
                     ),
-                  ),
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: AppColor.purple,
                   ),
                 ),
               ),
@@ -77,13 +76,13 @@ class _SplashscreenPageState extends State<SplashscreenPage> {
               FractionallySizedBox(
                 widthFactor: 0.8,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () => context.push('/select-your-interests'),
                   style: TextButton.styleFrom(
-                    side: BorderSide(
-                      color: Colors.grey,
+                    side: const BorderSide(
+                      color: AppColor.grey,
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     Strings.register,
                     style: TextStyle(
                       fontSize: 25.0,

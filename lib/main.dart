@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:spontaneo_pro/router/router_config.dart';
+
+final GetIt getIt = GetIt.instance;
 
 void main() {
   runApp(const SpontaneoApp());

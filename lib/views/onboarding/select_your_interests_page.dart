@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spontaneo_pro/colors.dart';
+import 'package:spontaneo_pro/models/categories.dart';
 import 'package:spontaneo_pro/strings.dart';
 
 class SelectYourInterestsPage extends StatelessWidget {
@@ -8,6 +9,33 @@ class SelectYourInterestsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Categories> items = [
+      Categories(
+        'Personal Development',
+        [
+          'Mindfulness & Meditation',
+          'Skill Learning',
+          'Language Practice',
+          'Reading & Writing',
+        ],
+      ),
+      Categories(
+        'Physical Health',
+        [
+          'Exercise & Fitness',
+          'Yoga & Pilates',
+          'Outdoor Activities',
+          'Dance Moves',
+        ],
+      ),
+      Categories(
+        'Mental Wellness',
+        [
+          'Journaling',
+          'Gratitude Practice',
+        ],
+      )
+    ];
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -46,6 +74,54 @@ class SelectYourInterestsPage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(
+          top: 40.0,
+          left: 20.0,
+          right: 20.0,
+          bottom: 20.0,
+        ),
+        child: ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+          itemBuilder: (context, index) => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                items[index].title,
+                style: const TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w700,
+                  color: AppColor.purple,
+                ),
+              ),
+              const SizedBox(height: 20.0),
+              Wrap(
+                spacing: 10.0,
+                runSpacing: 10.0,
+                children: items[index]
+                    .categories
+                    .map(
+                      (subCategory) => Chip(
+                        label: Text(subCategory, textAlign: TextAlign.center),
+                        backgroundColor: Colors.white,
+                        // padding: EdgeInsets.zero,
+                        labelPadding: const EdgeInsets.symmetric(
+                          vertical: 5.0,
+                          horizontal: 10.0,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                    )
+                    .toList(),
+              ),
+            ],
+          ),
+          separatorBuilder: (context, index) => const SizedBox(height: 20.0),
+          itemCount: items.length,
         ),
       ),
     );

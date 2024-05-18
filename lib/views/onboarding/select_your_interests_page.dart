@@ -4,38 +4,19 @@ import 'package:spontaneo_pro/colors.dart';
 import 'package:spontaneo_pro/models/categories.dart';
 import 'package:spontaneo_pro/strings.dart';
 
-class SelectYourInterestsPage extends StatelessWidget {
+class SelectYourInterestsPage extends StatefulWidget {
   const SelectYourInterestsPage({super.key});
 
   @override
+  State<SelectYourInterestsPage> createState() =>
+      _SelectYourInterestsPageState();
+}
+
+class _SelectYourInterestsPageState extends State<SelectYourInterestsPage> {
+  final Set<String> _selectedInterests = {};
+
+  @override
   Widget build(BuildContext context) {
-    final List<Categories> items = [
-      Categories(
-        'Personal Development',
-        [
-          'Mindfulness & Meditation',
-          'Skill Learning',
-          'Language Practice',
-          'Reading & Writing',
-        ],
-      ),
-      Categories(
-        'Physical Health',
-        [
-          'Exercise & Fitness',
-          'Yoga & Pilates',
-          'Outdoor Activities',
-          'Dance Moves',
-        ],
-      ),
-      Categories(
-        'Mental Wellness',
-        [
-          'Journaling',
-          'Gratitude Practice',
-        ],
-      )
-    ];
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -77,51 +58,65 @@ class SelectYourInterestsPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(
-          top: 40.0,
-          left: 20.0,
-          right: 20.0,
-          bottom: 20.0,
-        ),
-        child: ListView.separated(
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) => Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                items[index].title,
-                style: const TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w700,
-                  color: AppColor.purple,
-                ),
-              ),
-              const SizedBox(height: 20.0),
-              Wrap(
-                spacing: 10.0,
-                runSpacing: 10.0,
-                children: items[index]
-                    .categories
-                    .map(
-                      (subCategory) => Chip(
-                        label: Text(subCategory, textAlign: TextAlign.center),
-                        backgroundColor: Colors.white,
-                        // padding: EdgeInsets.zero,
-                        labelPadding: const EdgeInsets.symmetric(
-                          vertical: 5.0,
-                          horizontal: 10.0,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                      ),
-                    )
-                    .toList(),
-              ),
-            ],
-          ),
-          separatorBuilder: (context, index) => const SizedBox(height: 20.0),
+        padding: const EdgeInsets.all(20.0),
+        child: ListView.builder(
+          physics: const ClampingScrollPhysics(),
           itemCount: items.length,
+          itemBuilder: (context, categoryIndex) {
+            final category = items[categoryIndex]; // title category
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    category.title,
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w700,
+                      color: AppColor.purple,
+                    ),
+                  ),
+                  const SizedBox(height: 20.0),
+                  Wrap(
+                    spacing: 10.0,
+                    runSpacing: 10.0,
+                    children: List.generate(
+                      category.categories.length,
+                      (subCategoryIndex) {
+                        final subCategory =
+                            category.categories[subCategoryIndex];
+                        return ChoiceChip(
+                          showCheckmark: false,
+                          selectedColor: AppColor.purple,
+                          padding: const EdgeInsets.all(15.0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0),
+                          ),
+                          label: Text(
+                            subCategory,
+                            style: TextStyle(
+                              color: _selectedInterests.contains(subCategory)
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
+                          ),
+                          selected: _selectedInterests.contains(subCategory),
+                          onSelected: (isSelected) {
+                            setState(() {
+                              isSelected
+                                  ? _selectedInterests.add(subCategory)
+                                  : _selectedInterests.remove(subCategory);
+                            });
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

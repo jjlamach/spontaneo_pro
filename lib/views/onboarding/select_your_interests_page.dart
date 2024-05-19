@@ -13,7 +13,7 @@ class SelectYourInterestsPage extends StatefulWidget {
 }
 
 class _SelectYourInterestsPageState extends State<SelectYourInterestsPage> {
-  final Set<String> _selectedInterests = {};
+  final Map<String, Set<String>> _selectedInterests = {};
 
   @override
   Widget build(BuildContext context) {
@@ -59,64 +59,104 @@ class _SelectYourInterestsPageState extends State<SelectYourInterestsPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: ListView.builder(
-          physics: const ClampingScrollPhysics(),
-          itemCount: items.length,
-          itemBuilder: (context, categoryIndex) {
-            final category = items[categoryIndex]; // title category
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    category.title,
-                    style: const TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w700,
-                      color: AppColor.purple,
-                    ),
-                  ),
-                  const SizedBox(height: 20.0),
-                  Wrap(
-                    spacing: 10.0,
-                    runSpacing: 10.0,
-                    children: List.generate(
-                      category.categories.length,
-                      (subCategoryIndex) {
-                        final subCategory =
-                            category.categories[subCategoryIndex];
-                        return ChoiceChip(
-                          showCheckmark: false,
-                          selectedColor: AppColor.purple,
-                          padding: const EdgeInsets.all(15.0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(80.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                physics: const ClampingScrollPhysics(),
+                itemCount: items.length,
+                itemBuilder: (context, categoryIndex) {
+                  final category = items[categoryIndex]; // title category
+                  _selectedInterests.putIfAbsent(category.title, () => {});
+
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          category.title,
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.w700,
+                            color: AppColor.purple,
                           ),
-                          label: Text(
-                            subCategory,
-                            style: TextStyle(
-                              color: _selectedInterests.contains(subCategory)
-                                  ? Colors.white
-                                  : Colors.black,
-                            ),
+                        ),
+                        const SizedBox(height: 20.0),
+                        Wrap(
+                          spacing: 10.0,
+                          runSpacing: 10.0,
+                          children: List.generate(
+                            category.categories.length,
+                            (subCategoryIndex) {
+                              final subCategory =
+                                  category.categories[subCategoryIndex];
+                              return ChoiceChip(
+                                showCheckmark: false,
+                                side: const BorderSide(color: AppColor.grey),
+                                selectedColor: AppColor.purple,
+                                padding: const EdgeInsets.all(15.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(80.0),
+                                ),
+                                label: Text(
+                                  subCategory,
+                                  style: TextStyle(
+                                    color: _selectedInterests[category.title]!
+                                            .contains(subCategory)
+                                        ? Colors.white
+                                        : Colors.black,
+                                  ),
+                                ),
+                                selected: _selectedInterests[category.title]!
+                                    .contains(subCategory),
+                                onSelected: (isSelected) {
+                                  setState(() {
+                                    if (isSelected) {
+                                      _selectedInterests[category.title]!
+                                          .add(subCategory);
+                                    } else {
+                                      _selectedInterests[category.title]!
+                                          .remove(subCategory);
+                                    }
+                                  });
+                                },
+                              );
+                            },
                           ),
-                          selected: _selectedInterests.contains(subCategory),
-                          onSelected: (isSelected) {
-                            setState(() {
-                              isSelected
-                                  ? _selectedInterests.add(subCategory)
-                                  : _selectedInterests.remove(subCategory);
-                            });
-                          },
-                        );
-                      },
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
-            );
-          },
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  side: const BorderSide(
+                    color: AppColor.purple,
+                  ),
+                ),
+                onPressed: () {},
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal: 30.0,
+                  ),
+                  child: Text(
+                    Strings.next,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

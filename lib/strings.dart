@@ -7,4 +7,5 @@ class Strings {
   static const String chooseCategories = 'Choose at least 3 categories';
   static const String youCanChangeThem =
       'Don’t worry you can change this later';
+  static const String next = 'Next';
 }

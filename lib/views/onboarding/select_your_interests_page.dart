@@ -19,6 +19,7 @@ class _SelectYourInterestsPageState extends State<SelectYourInterestsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.transparent,
         leading: IconButton(
           onPressed: () => context.pop(),
           icon: const Icon(Icons.arrow_back_ios),

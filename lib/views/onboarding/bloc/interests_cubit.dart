@@ -3,21 +3,38 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'interests_cubit.freezed.dart';
 
-// TODO: Logic
 class InterestsCubit extends Cubit<InterestsState> {
-  InterestsCubit() : super(const InterestsState(selectedItems: {}));
+  InterestsCubit() : super(const _Initial());
 
-  void toggleSelection(String categoryName, String activities) {}
+  void toggleSelection(Map<String, Set<String>> interests) {
+    emit(_CategoryAdded(interests));
+  }
+
+  void untoggelSelection(Map<String, Set<String>> interests) {
+    emit(_CategoryUnselected(interests));
+  }
+
+  void submitInterests(Map<String, Set<String>> interests) {
+    emit(_Interests(interests));
+  }
 
   @override
   void onChange(Change<InterestsState> change) {
     super.onChange(change);
+    print('Change: $change');
   }
 }
 
 @freezed
 class InterestsState with _$InterestsState {
-  const factory InterestsState({
-    required Map<String, Set<String>> selectedItems,
-  }) = _InterestsState;
+  const factory InterestsState.initial() = _Initial;
+  const factory InterestsState.selectedSubcategory(
+      Map<String, Set<String>> selectedItems) = _CategoryAdded;
+  const factory InterestsState.unselectedSubCategory(
+      Map<String, Set<String>> selectedItems) = _CategoryUnselected;
+  const factory InterestsState.submittedInterests(
+      Map<String, Set<String>> selectedItems) = _Interests;
+  // const factory InterestsState({
+  //   required Map<String, Set<String>> selectedItems,
+  // }) = _InterestsState;
 }

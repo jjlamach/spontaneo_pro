@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spontaneo_pro/colors.dart';
 import 'package:spontaneo_pro/models/categories.dart';
 import 'package:spontaneo_pro/strings.dart';
+import 'package:spontaneo_pro/views/onboarding/bloc/interests_cubit.dart';
 
 class SelectYourInterestsPage extends StatefulWidget {
   const SelectYourInterestsPage({super.key});
@@ -116,9 +118,16 @@ class _SelectYourInterestsPageState extends State<SelectYourInterestsPage> {
                                     if (isSelected) {
                                       _selectedInterests[category.title]!
                                           .add(subCategory);
+                                      context
+                                          .read<InterestsCubit>()
+                                          .toggleSelection(_selectedInterests);
                                     } else {
                                       _selectedInterests[category.title]!
                                           .remove(subCategory);
+                                      context
+                                          .read<InterestsCubit>()
+                                          .untoggelSelection(
+                                              _selectedInterests);
                                     }
                                   });
                                 },
@@ -141,7 +150,9 @@ class _SelectYourInterestsPageState extends State<SelectYourInterestsPage> {
                     color: AppColor.purple,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () => context
+                    .read<InterestsCubit>()
+                    .submitInterests(_selectedInterests),
                 child: const Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: 10.0,

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:spontaneo_pro/main.dart';
 
 part 'interests_cubit.freezed.dart';
 
@@ -21,7 +22,8 @@ class InterestsCubit extends Cubit<InterestsState> {
   @override
   void onChange(Change<InterestsState> change) {
     super.onChange(change);
-    print('Change: $change');
+    kLogger.i(
+        'InterestCubit: ${change.currentState}\nNextState:${change.nextState}');
   }
 }
 

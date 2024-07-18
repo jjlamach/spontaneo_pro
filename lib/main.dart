@@ -1,19 +1,26 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:logger/logger.dart';
+import 'package:spontaneo_pro/firebase_options.dart';
 import 'package:spontaneo_pro/router/router_config.dart';
 import 'package:spontaneo_pro/views/onboarding/bloc/interests_cubit.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 final GetIt getIt = GetIt.instance;
+final Logger kLogger = Logger(
+  printer: PrettyPrinter(
+    printEmojis: true,
+    colors: true,
+  ),
+  filter: DevelopmentFilter(),
+);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   _injectDependencies();
-  await Supabase.initialize(
-    url: 'https://nwhswqnhabkvxfxjrwdl.supabase.co',
-    anonKey:
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im53aHN3cW5oYWJrdnhmeGpyd2RsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTYxNTU0MTksImV4cCI6MjAzMTczMTQxOX0.ryOIC8U07oNd9nJAy4um8uhnQonGt_ugMxdKjPP0-mM',
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const SpontaneoApp());
 }
@@ -35,6 +42,84 @@ class SpontaneoApp extends StatelessWidget {
         title: 'Spontaneo App',
         theme: ThemeData(
           useMaterial3: true,
+          inputDecorationTheme: const InputDecorationTheme(
+            contentPadding: EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 12.0,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Color(0xff836FFF),
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(20.0),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Color(0xff836FFF),
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(20.0),
+              ),
+            ),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Color(0xff836FFF),
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(20.0),
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.redAccent,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(20.0),
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.redAccent,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(20.0),
+              ),
+            ),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Colors.grey,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(20.0),
+              ),
+            ),
+          ),
+          textTheme: const TextTheme(
+            displayMedium: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.w400,
+              color: Colors.black,
+            ),
+            titleLarge: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          colorScheme: const ColorScheme(
+            brightness: Brightness.light,
+            primary: Color(0xff836FFF),
+            onPrimary: Colors.white,
+            secondary: Colors.black,
+            onSecondary: Colors.white,
+            error: Colors.redAccent,
+            onError: Colors.white,
+            background: Colors.white,
+            onBackground: Colors.black,
+            surface: Colors.white,
+            onSurface: Colors.black,
+          ),
         ),
         routerConfig: router,
       ),

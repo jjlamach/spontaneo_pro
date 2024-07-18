@@ -150,9 +150,12 @@ class _SelectYourInterestsPageState extends State<SelectYourInterestsPage> {
                     color: AppColor.purple,
                   ),
                 ),
-                onPressed: () => context
-                    .read<InterestsCubit>()
-                    .submitInterests(_selectedInterests),
+                onPressed: () {
+                  context
+                      .read<InterestsCubit>()
+                      .submitInterests(_selectedInterests);
+                  context.go('/select-your-interests/finish-registration');
+                },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(
                     vertical: 10.0,

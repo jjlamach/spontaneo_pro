@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1034540971439",
+    "project_id": "spontaneo-app",
+    "storage_bucket": "spontaneo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034540971439:android:91ccabe51da053255eeb5a",
+        "android_client_info": {
+          "package_name": "com.julama.spontaneo_pro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoxLEE8ttBr1gMIYk7uQ5fmTagZXGMq8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

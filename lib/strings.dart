@@ -8,4 +8,7 @@ class Strings {
   static const String youCanChangeThem =
       'Don’t worry you can change this later';
   static const String next = 'Next';
+  static const String finishRegistration = 'Finish Registration';
+  static const String email = 'Email';
+  static const String password = 'Password';
 }

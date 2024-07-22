@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:spontaneo_pro/strings.dart';
+import 'package:spontaneo_pro/views/onboarding/bloc/onboarding_cubit.dart';
 
 class FinishRegistrationPage extends StatefulWidget {
   const FinishRegistrationPage({super.key});
@@ -38,6 +41,7 @@ class _FinishRegistrationPageState extends State<FinishRegistrationPage> {
           children: [
             Expanded(
               child: ListView(
+                physics: const ClampingScrollPhysics(),
                 children: [
                   Form(
                     key: _formKey,
@@ -126,15 +130,30 @@ class _FinishRegistrationPageState extends State<FinishRegistrationPage> {
                 ],
               ),
             ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: FractionallySizedBox(
-                widthFactor: 0.9,
-                child: OutlinedButton(
-                  onPressed: () {
-                    final isValid = _formKey.currentState?.validate();
-                  },
-                  child: Text('Register'),
+            BlocListener<OnBoardingCubit, OnBoardingState>(
+              listener: (context, state) {
+                state.whenOrNull(
+                  register: (_) => context.go('/home'),
+                );
+              },
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: FractionallySizedBox(
+                  widthFactor: 0.9,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      final isValid = _formKey.currentState?.validate();
+                      if (isValid == true) {
+                        context
+                            .read<OnBoardingCubit>()
+                            .registerWithEmailAndPassword(
+                              _emailCtrl.text,
+                              _passwordCtrl.text,
+                            );
+                      }
+                    },
+                    child: Text('Register'),
+                  ),
                 ),
               ),
             ),

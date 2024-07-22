@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:spontaneo_pro/firebase_options.dart';
 import 'package:spontaneo_pro/router/router_config.dart';
+import 'package:spontaneo_pro/strings.dart';
 import 'package:spontaneo_pro/views/onboarding/bloc/interests_cubit.dart';
+import 'package:spontaneo_pro/views/onboarding/bloc/onboarding_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
+late SharedPreferences kPreferences;
 final Logger kLogger = Logger(
   printer: PrettyPrinter(
     printEmojis: true,
@@ -18,6 +22,7 @@ final Logger kLogger = Logger(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  kPreferences = await SharedPreferences.getInstance();
   _injectDependencies();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -27,6 +32,7 @@ void main() async {
 
 void _injectDependencies() {
   getIt.registerFactory(() => InterestsCubit());
+  getIt.registerFactory(() => OnBoardingCubit());
 }
 
 class SpontaneoApp extends StatelessWidget {
@@ -37,9 +43,10 @@ class SpontaneoApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getIt.get<InterestsCubit>()),
+        BlocProvider(create: (context) => getIt.get<OnBoardingCubit>()),
       ],
       child: MaterialApp.router(
-        title: 'Spontaneo App',
+        title: Strings.spontaneoApp,
         theme: ThemeData(
           useMaterial3: true,
           appBarTheme: const AppBarTheme(

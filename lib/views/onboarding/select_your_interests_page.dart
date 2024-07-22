@@ -144,12 +144,7 @@ class _SelectYourInterestsPageState extends State<SelectYourInterestsPage> {
             Align(
               alignment: Alignment.bottomRight,
               child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.black,
-                  side: const BorderSide(
-                    color: AppColor.purple,
-                  ),
-                ),
+                style: Theme.of(context).outlinedButtonTheme.style,
                 onPressed: () {
                   context
                       .read<InterestsCubit>()
@@ -163,10 +158,6 @@ class _SelectYourInterestsPageState extends State<SelectYourInterestsPage> {
                   ),
                   child: Text(
                     Strings.next,
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w400,
-                    ),
                   ),
                 ),
               ),

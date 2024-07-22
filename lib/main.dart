@@ -42,6 +42,28 @@ class SpontaneoApp extends StatelessWidget {
         title: 'Spontaneo App',
         theme: ThemeData(
           useMaterial3: true,
+          appBarTheme: const AppBarTheme(
+            surfaceTintColor: Colors.transparent,
+          ),
+          outlinedButtonTheme: const OutlinedButtonThemeData(
+            style: ButtonStyle(
+              foregroundColor: MaterialStatePropertyAll(Colors.white),
+              backgroundColor: MaterialStatePropertyAll(
+                Color(0xff836FFF),
+              ),
+              side: MaterialStatePropertyAll(
+                BorderSide(
+                  color: Colors.transparent,
+                ),
+              ),
+              textStyle: MaterialStatePropertyAll(
+                TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+          ),
           inputDecorationTheme: const InputDecorationTheme(
             contentPadding: EdgeInsets.symmetric(
               vertical: 8.0,

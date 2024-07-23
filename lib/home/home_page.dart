@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:spontaneo_pro/main.dart';
 import 'package:spontaneo_pro/views/onboarding/bloc/onboarding_cubit.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,7 +19,7 @@ class HomePage extends StatelessWidget {
           },
           child: TextButton(
             onPressed: () => context.read<OnBoardingCubit>().logOut(),
-            child: Text('Log Out'),
+            child: Text('Log Out, ${kPreferences.getString('username')}'),
           ),
         ),
       ),

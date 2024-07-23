@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:spontaneo_pro/home/home_page.dart';
 import 'package:spontaneo_pro/main.dart';
 import 'package:spontaneo_pro/views/onboarding/finish_registration_page.dart';
+import 'package:spontaneo_pro/views/onboarding/login/login_page.dart';
 import 'package:spontaneo_pro/views/onboarding/select_your_interests_page.dart';
 import 'package:spontaneo_pro/views/splashscreen/splashscreen_page.dart';
 
@@ -32,6 +33,10 @@ final GoRouter router = GoRouter(
               builder: (context, state) => const FinishRegistrationPage(),
             ),
           ],
+        ),
+        GoRoute(
+          path: 'login',
+          builder: (context, state) => const LoginPage(),
         ),
         GoRoute(
           path: 'home',

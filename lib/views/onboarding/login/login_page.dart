@@ -4,24 +4,22 @@ import 'package:go_router/go_router.dart';
 import 'package:spontaneo_pro/strings.dart';
 import 'package:spontaneo_pro/views/onboarding/bloc/onboarding_cubit.dart';
 
-class FinishRegistrationPage extends StatefulWidget {
-  const FinishRegistrationPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<FinishRegistrationPage> createState() => _FinishRegistrationPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _FinishRegistrationPageState extends State<FinishRegistrationPage> {
+class _LoginPageState extends State<LoginPage> {
   late TextEditingController _emailCtrl;
   late TextEditingController _passwordCtrl;
-  late TextEditingController _username;
   late GlobalKey<FormState> _formKey;
 
   @override
   void initState() {
     _emailCtrl = TextEditingController();
     _passwordCtrl = TextEditingController();
-    _username = TextEditingController();
     _formKey = GlobalKey();
     super.initState();
   }
@@ -30,7 +28,6 @@ class _FinishRegistrationPageState extends State<FinishRegistrationPage> {
   void dispose() {
     _emailCtrl.dispose();
     _passwordCtrl.dispose();
-    _username.dispose();
     super.dispose();
   }
 
@@ -52,7 +49,7 @@ class _FinishRegistrationPageState extends State<FinishRegistrationPage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                          Strings.finishRegistration,
+                          Strings.logIn,
                           style: Theme.of(context).textTheme.displayMedium,
                         ),
                         const SizedBox(height: 40.0),
@@ -125,44 +122,8 @@ class _FinishRegistrationPageState extends State<FinishRegistrationPage> {
                                 .disabledBorder,
                           ),
                         ),
-                        const SizedBox(height: 20.0),
-                        Text(
-                          Strings.username,
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        const SizedBox(height: 20.0),
-                        TextFormField(
-                          controller: _username,
-                          validator: (value) {
-                            final val = value ?? '';
-                            if (val.isEmpty) {
-                              return 'Username is required';
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            border:
-                                Theme.of(context).inputDecorationTheme.border,
-                            focusedBorder: Theme.of(context)
-                                .inputDecorationTheme
-                                .focusedBorder,
-                            focusedErrorBorder: Theme.of(context)
-                                .inputDecorationTheme
-                                .focusedErrorBorder,
-                            errorBorder: Theme.of(context)
-                                .inputDecorationTheme
-                                .errorBorder,
-                            enabledBorder: Theme.of(context)
-                                .inputDecorationTheme
-                                .enabledBorder,
-                            disabledBorder: Theme.of(context)
-                                .inputDecorationTheme
-                                .disabledBorder,
-                          ),
-                        ),
                         const SizedBox(
-                          height: 100.0,
-                        ), // Add some space before the button
+                            height: 100.0), // Add some space before the button
                       ],
                     ),
                   ),
@@ -172,7 +133,7 @@ class _FinishRegistrationPageState extends State<FinishRegistrationPage> {
             BlocListener<OnBoardingCubit, OnBoardingState>(
               listener: (context, state) {
                 state.whenOrNull(
-                  register: (_) => context.go('/home'),
+                  logIn: () => context.go('/home'),
                 );
               },
               child: Align(
@@ -183,16 +144,13 @@ class _FinishRegistrationPageState extends State<FinishRegistrationPage> {
                     onPressed: () {
                       final isValid = _formKey.currentState?.validate();
                       if (isValid == true) {
-                        context
-                            .read<OnBoardingCubit>()
-                            .registerWithEmailAndPassword(
+                        context.read<OnBoardingCubit>().logIn(
                               _emailCtrl.text,
                               _passwordCtrl.text,
-                              _username.text,
                             );
                       }
                     },
-                    child: const Text('Register'),
+                    child: const Text(Strings.logIn),
                   ),
                 ),
               ),

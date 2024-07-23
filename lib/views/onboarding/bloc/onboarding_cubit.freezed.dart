@@ -21,6 +21,7 @@ mixin _$OnBoardingState {
     required TResult Function() initial,
     required TResult Function(String sessionToken) register,
     required TResult Function() loading,
+    required TResult Function() logIn,
     required TResult Function() logOut,
   }) =>
       throw _privateConstructorUsedError;
@@ -29,6 +30,7 @@ mixin _$OnBoardingState {
     TResult? Function()? initial,
     TResult? Function(String sessionToken)? register,
     TResult? Function()? loading,
+    TResult? Function()? logIn,
     TResult? Function()? logOut,
   }) =>
       throw _privateConstructorUsedError;
@@ -37,6 +39,7 @@ mixin _$OnBoardingState {
     TResult Function()? initial,
     TResult Function(String sessionToken)? register,
     TResult Function()? loading,
+    TResult Function()? logIn,
     TResult Function()? logOut,
     required TResult orElse(),
   }) =>
@@ -46,6 +49,7 @@ mixin _$OnBoardingState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Registered value) register,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoggedIn value) logIn,
     required TResult Function(_LoggedOut value) logOut,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +58,7 @@ mixin _$OnBoardingState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Registered value)? register,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoggedIn value)? logIn,
     TResult? Function(_LoggedOut value)? logOut,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +67,7 @@ mixin _$OnBoardingState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Registered value)? register,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoggedIn value)? logIn,
     TResult Function(_LoggedOut value)? logOut,
     required TResult orElse(),
   }) =>
@@ -127,6 +133,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function(String sessionToken) register,
     required TResult Function() loading,
+    required TResult Function() logIn,
     required TResult Function() logOut,
   }) {
     return initial();
@@ -138,6 +145,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function(String sessionToken)? register,
     TResult? Function()? loading,
+    TResult? Function()? logIn,
     TResult? Function()? logOut,
   }) {
     return initial?.call();
@@ -149,6 +157,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function(String sessionToken)? register,
     TResult Function()? loading,
+    TResult Function()? logIn,
     TResult Function()? logOut,
     required TResult orElse(),
   }) {
@@ -164,6 +173,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Registered value) register,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoggedIn value) logIn,
     required TResult Function(_LoggedOut value) logOut,
   }) {
     return initial(this);
@@ -175,6 +185,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Registered value)? register,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoggedIn value)? logIn,
     TResult? Function(_LoggedOut value)? logOut,
   }) {
     return initial?.call(this);
@@ -186,6 +197,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Registered value)? register,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoggedIn value)? logIn,
     TResult Function(_LoggedOut value)? logOut,
     required TResult orElse(),
   }) {
@@ -268,6 +280,7 @@ class _$RegisteredImpl implements _Registered {
     required TResult Function() initial,
     required TResult Function(String sessionToken) register,
     required TResult Function() loading,
+    required TResult Function() logIn,
     required TResult Function() logOut,
   }) {
     return register(sessionToken);
@@ -279,6 +292,7 @@ class _$RegisteredImpl implements _Registered {
     TResult? Function()? initial,
     TResult? Function(String sessionToken)? register,
     TResult? Function()? loading,
+    TResult? Function()? logIn,
     TResult? Function()? logOut,
   }) {
     return register?.call(sessionToken);
@@ -290,6 +304,7 @@ class _$RegisteredImpl implements _Registered {
     TResult Function()? initial,
     TResult Function(String sessionToken)? register,
     TResult Function()? loading,
+    TResult Function()? logIn,
     TResult Function()? logOut,
     required TResult orElse(),
   }) {
@@ -305,6 +320,7 @@ class _$RegisteredImpl implements _Registered {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Registered value) register,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoggedIn value) logIn,
     required TResult Function(_LoggedOut value) logOut,
   }) {
     return register(this);
@@ -316,6 +332,7 @@ class _$RegisteredImpl implements _Registered {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Registered value)? register,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoggedIn value)? logIn,
     TResult? Function(_LoggedOut value)? logOut,
   }) {
     return register?.call(this);
@@ -327,6 +344,7 @@ class _$RegisteredImpl implements _Registered {
     TResult Function(_Initial value)? initial,
     TResult Function(_Registered value)? register,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoggedIn value)? logIn,
     TResult Function(_LoggedOut value)? logOut,
     required TResult orElse(),
   }) {
@@ -387,6 +405,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function(String sessionToken) register,
     required TResult Function() loading,
+    required TResult Function() logIn,
     required TResult Function() logOut,
   }) {
     return loading();
@@ -398,6 +417,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function(String sessionToken)? register,
     TResult? Function()? loading,
+    TResult? Function()? logIn,
     TResult? Function()? logOut,
   }) {
     return loading?.call();
@@ -409,6 +429,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function(String sessionToken)? register,
     TResult Function()? loading,
+    TResult Function()? logIn,
     TResult Function()? logOut,
     required TResult orElse(),
   }) {
@@ -424,6 +445,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Registered value) register,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoggedIn value) logIn,
     required TResult Function(_LoggedOut value) logOut,
   }) {
     return loading(this);
@@ -435,6 +457,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Registered value)? register,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoggedIn value)? logIn,
     TResult? Function(_LoggedOut value)? logOut,
   }) {
     return loading?.call(this);
@@ -446,6 +469,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Registered value)? register,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoggedIn value)? logIn,
     TResult Function(_LoggedOut value)? logOut,
     required TResult orElse(),
   }) {
@@ -458,6 +482,126 @@ class _$LoadingImpl implements _Loading {
 
 abstract class _Loading implements OnBoardingState {
   const factory _Loading() = _$LoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$LoggedInImplCopyWith<$Res> {
+  factory _$$LoggedInImplCopyWith(
+          _$LoggedInImpl value, $Res Function(_$LoggedInImpl) then) =
+      __$$LoggedInImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoggedInImplCopyWithImpl<$Res>
+    extends _$OnBoardingStateCopyWithImpl<$Res, _$LoggedInImpl>
+    implements _$$LoggedInImplCopyWith<$Res> {
+  __$$LoggedInImplCopyWithImpl(
+      _$LoggedInImpl _value, $Res Function(_$LoggedInImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoggedInImpl implements _LoggedIn {
+  const _$LoggedInImpl();
+
+  @override
+  String toString() {
+    return 'OnBoardingState.logIn()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoggedInImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(String sessionToken) register,
+    required TResult Function() loading,
+    required TResult Function() logIn,
+    required TResult Function() logOut,
+  }) {
+    return logIn();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(String sessionToken)? register,
+    TResult? Function()? loading,
+    TResult? Function()? logIn,
+    TResult? Function()? logOut,
+  }) {
+    return logIn?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(String sessionToken)? register,
+    TResult Function()? loading,
+    TResult Function()? logIn,
+    TResult Function()? logOut,
+    required TResult orElse(),
+  }) {
+    if (logIn != null) {
+      return logIn();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Registered value) register,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_LoggedIn value) logIn,
+    required TResult Function(_LoggedOut value) logOut,
+  }) {
+    return logIn(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Registered value)? register,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoggedIn value)? logIn,
+    TResult? Function(_LoggedOut value)? logOut,
+  }) {
+    return logIn?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Registered value)? register,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_LoggedIn value)? logIn,
+    TResult Function(_LoggedOut value)? logOut,
+    required TResult orElse(),
+  }) {
+    if (logIn != null) {
+      return logIn(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoggedIn implements OnBoardingState {
+  const factory _LoggedIn() = _$LoggedInImpl;
 }
 
 /// @nodoc
@@ -501,6 +645,7 @@ class _$LoggedOutImpl implements _LoggedOut {
     required TResult Function() initial,
     required TResult Function(String sessionToken) register,
     required TResult Function() loading,
+    required TResult Function() logIn,
     required TResult Function() logOut,
   }) {
     return logOut();
@@ -512,6 +657,7 @@ class _$LoggedOutImpl implements _LoggedOut {
     TResult? Function()? initial,
     TResult? Function(String sessionToken)? register,
     TResult? Function()? loading,
+    TResult? Function()? logIn,
     TResult? Function()? logOut,
   }) {
     return logOut?.call();
@@ -523,6 +669,7 @@ class _$LoggedOutImpl implements _LoggedOut {
     TResult Function()? initial,
     TResult Function(String sessionToken)? register,
     TResult Function()? loading,
+    TResult Function()? logIn,
     TResult Function()? logOut,
     required TResult orElse(),
   }) {
@@ -538,6 +685,7 @@ class _$LoggedOutImpl implements _LoggedOut {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Registered value) register,
     required TResult Function(_Loading value) loading,
+    required TResult Function(_LoggedIn value) logIn,
     required TResult Function(_LoggedOut value) logOut,
   }) {
     return logOut(this);
@@ -549,6 +697,7 @@ class _$LoggedOutImpl implements _LoggedOut {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Registered value)? register,
     TResult? Function(_Loading value)? loading,
+    TResult? Function(_LoggedIn value)? logIn,
     TResult? Function(_LoggedOut value)? logOut,
   }) {
     return logOut?.call(this);
@@ -560,6 +709,7 @@ class _$LoggedOutImpl implements _LoggedOut {
     TResult Function(_Initial value)? initial,
     TResult Function(_Registered value)? register,
     TResult Function(_Loading value)? loading,
+    TResult Function(_LoggedIn value)? logIn,
     TResult Function(_LoggedOut value)? logOut,
     required TResult orElse(),
   }) {

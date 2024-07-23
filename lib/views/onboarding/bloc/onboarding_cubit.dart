@@ -9,20 +9,53 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   OnBoardingCubit() : super(const _Initial());
 
-  void registerWithEmailAndPassword(String email, String password) async {
+  void registerWithEmailAndPassword(
+    String email,
+    String password,
+    String newUsername,
+  ) async {
     final result = await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
+
+    User? user = result.user;
+    await user?.updateDisplayName(newUsername);
+    await user?.reload();
+
     final accessToken = result.user?.refreshToken ?? '';
+    final username = FirebaseAuth.instance.currentUser?.displayName ?? email;
     await kPreferences.setString('accessToken', accessToken);
+    await kPreferences.setString('username', username);
     emit(_Registered(accessToken));
+  }
+
+  void logIn(String email, String password) async {
+    final UserCredential credential =
+        await _firebaseAuth.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    final accessToken = credential.user?.refreshToken ?? '';
+    await kPreferences.setString('accessToken', accessToken);
+    await kPreferences.setString(
+      'username',
+      credential.user?.displayName ?? email,
+    );
+    emit(const _LoggedIn());
   }
 
   void logOut() async {
     await _firebaseAuth.signOut();
     await kPreferences.remove('accessToken');
+    await kPreferences.remove('username');
     emit(const _LoggedOut());
+  }
+
+  @override
+  void onChange(Change<OnBoardingState> change) {
+    super.onChange(change);
+    kLogger.i('OnBoardingCubit: $change');
   }
 }
 
@@ -31,5 +64,6 @@ class OnBoardingState with _$OnBoardingState {
   const factory OnBoardingState.initial() = _Initial;
   const factory OnBoardingState.register(String sessionToken) = _Registered;
   const factory OnBoardingState.loading() = _Loading;
+  const factory OnBoardingState.logIn() = _LoggedIn;
   const factory OnBoardingState.logOut() = _LoggedOut;
 }

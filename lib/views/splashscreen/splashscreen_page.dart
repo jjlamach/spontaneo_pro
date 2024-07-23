@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spontaneo_pro/colors.dart';
 import 'package:spontaneo_pro/strings.dart';
+import 'package:spontaneo_pro/views/onboarding/bloc/onboarding_cubit.dart';
 
 class SplashscreenPage extends StatefulWidget {
   const SplashscreenPage({super.key});
@@ -58,7 +60,7 @@ class _SplashscreenPageState extends State<SplashscreenPage> {
               FractionallySizedBox(
                 widthFactor: 0.8,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () => context.push('/login'),
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: AppColor.purple,

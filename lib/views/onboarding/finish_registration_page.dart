@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:spontaneo_pro/strings.dart';
+import 'package:spontaneo_pro/views/onboarding/bloc/interests_cubit.dart';
 import 'package:spontaneo_pro/views/onboarding/bloc/onboarding_cubit.dart';
 
 class FinishRegistrationPage extends StatefulWidget {
@@ -182,6 +183,11 @@ class _FinishRegistrationPageState extends State<FinishRegistrationPage> {
                   child: OutlinedButton(
                     onPressed: () {
                       final isValid = _formKey.currentState?.validate();
+                      final state = context.read<InterestsCubit>().state;
+                      final Map<String, Set<String>>? interests =
+                          state.whenOrNull(
+                        submittedInterests: (selectedItems) => selectedItems,
+                      );
                       if (isValid == true) {
                         context
                             .read<OnBoardingCubit>()
@@ -189,6 +195,7 @@ class _FinishRegistrationPageState extends State<FinishRegistrationPage> {
                               _emailCtrl.text,
                               _passwordCtrl.text,
                               _username.text,
+                              interests,
                             );
                       }
                     },

@@ -2,17 +2,20 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:spontaneo_pro/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 part 'onboarding_cubit.freezed.dart';
 
 class OnBoardingCubit extends Cubit<OnBoardingState> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   OnBoardingCubit() : super(const _Initial());
 
   void registerWithEmailAndPassword(
     String email,
     String password,
     String newUsername,
+    Map<String, Set<String>>? interests,
   ) async {
     final result = await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
@@ -27,6 +30,17 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     final username = FirebaseAuth.instance.currentUser?.displayName ?? email;
     await kPreferences.setString('accessToken', accessToken);
     await kPreferences.setString('username', username);
+
+    final modifiableInterests = Map<String, Set<String>>.from(interests ?? {});
+    modifiableInterests.removeWhere((key, value) => value.isEmpty);
+
+    // Save to DB
+    await _firestore.collection('users').doc(username).set(
+      {
+        'interests': modifiableInterests,
+      },
+    );
+
     emit(_Registered(accessToken));
   }
 

@@ -17,6 +17,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
     String newUsername,
     Map<String, Set<String>>? interests,
   ) async {
+    emit(const _Loading());
     final result = await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
@@ -41,11 +42,11 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
         'interests': modifiableInterests,
       },
     );
-
     emit(_Registered(accessToken));
   }
 
   void logIn(String email, String password) async {
+    emit(const _Loading());
     final UserCredential credential =
         await _firebaseAuth.signInWithEmailAndPassword(
       email: email,
@@ -61,6 +62,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
   }
 
   void logOut() async {
+    emit(const _Loading());
     await _firebaseAuth.signOut();
     await kPreferences.remove('accessToken');
     await kPreferences.remove('username');

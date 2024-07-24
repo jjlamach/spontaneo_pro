@@ -149,7 +149,7 @@ class _SelectYourInterestsPageState extends State<SelectYourInterestsPage> {
                   context
                       .read<InterestsCubit>()
                       .submitInterests(_selectedInterests);
-                  context.go('/select-your-interests/finish-registration');
+                  context.push('/select-your-interests/finish-registration');
                 },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(

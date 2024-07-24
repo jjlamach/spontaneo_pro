@@ -24,6 +24,7 @@ class OnBoardingCubit extends Cubit<OnBoardingState> {
 
     User? user = result.user;
     await user?.updateDisplayName(newUsername);
+    // Do I need this?
     await user?.reload();
 
     final accessToken = result.user?.refreshToken ?? '';
